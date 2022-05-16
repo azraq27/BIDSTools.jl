@@ -63,7 +63,7 @@ function File(
                               )
         end
     end
-    metadata = !load_metadata ? OrderedDict{String,Any}() :
+    metadata = (!load_metadata || get_metadata_path(path)==nothing) ? OrderedDict{String,Any}() :
                JSON.parsefile(
                    get_metadata_path(path), dicttype=OrderedDict{String,Any}
                )
