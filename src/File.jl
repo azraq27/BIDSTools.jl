@@ -63,10 +63,15 @@ function File(
                               )
         end
     end
-    metadata = (!load_metadata || get_metadata_path(path)==nothing) ? OrderedDict{String,Any}() :
-               JSON.parsefile(
-                   get_metadata_path(path), dicttype=OrderedDict{String,Any}
-               )
+    try
+        metadata = (!load_metadata || get_metadata_path(path)==nothing) ? OrderedDict{String,Any}() :
+                   JSON.parsefile(
+                       get_metadata_path(path), dicttype=OrderedDict{String,Any}
+                   )
+    catch
+        @info "Exception while processing metadata for file: $path\n\n"
+        rethrow()
+    end
     File(path, metadata, entities)
 end
 
