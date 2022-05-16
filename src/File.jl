@@ -233,7 +233,7 @@ function get_files(
     files::Vector{File}; path::Union{String, Regex, Nothing}=nothing, kws...
 )
     if !isnothing(path)
-        filter!(x->occursin(path, x.path), files)
+        files = filter(x->occursin(path, x.path), files)
     end
     result = filter(files) do f
         check_entities_meta(f; kws...)
