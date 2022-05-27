@@ -1,4 +1,4 @@
-module BIDSTools
+module BIDSTools2:
 
 using JSON
 using DataStructures
